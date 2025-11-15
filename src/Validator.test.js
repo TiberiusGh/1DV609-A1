@@ -23,5 +23,15 @@ describe('Validator class test suite', () => {
 
       expect(validator.isTitleCorrect('content')).toBe(true)
     })
+
+    test('Should return false when title is longer than 50 characters', () => {
+      const validator = new Validator()
+
+      expect(
+        validator.isTitleCorrect(
+          'Structuring test can be done trough `triple A`. Arrange'
+        )
+      ).toBe(false)
+    })
   })
 })
