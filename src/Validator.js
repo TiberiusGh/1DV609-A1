@@ -1,5 +1,5 @@
 export class Validator {
-  isTitleCorrect() {
-    return false
+  isTitleCorrect(input) {
+    return !!input
   }
 }
