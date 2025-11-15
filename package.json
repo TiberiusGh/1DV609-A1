@@ -1,0 +1,23 @@
+{
+  "name": "1dv609-a1",
+  "version": "1.0.0",
+  "description": "This project is licensed under [GLWTPL](./LICENSE)",
+  "homepage": "https://github.com/TiberiusGh/1DV609-A1#readme",
+  "bugs": {
+    "url": "https://github.com/TiberiusGh/1DV609-A1/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TiberiusGh/1DV609-A1.git"
+  },
+  "license": "GLWTPL",
+  "author": "Tiberius Gherac",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^30.2.0"
+  }
+}
