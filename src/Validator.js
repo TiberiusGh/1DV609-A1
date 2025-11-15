@@ -1,5 +1,5 @@
 export class Validator {
-  checkTitle() {
-    throw new TypeError()
+  isTitleCorrect() {
+    return false
   }
 }
