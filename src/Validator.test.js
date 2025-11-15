@@ -21,7 +21,7 @@ describe('Validator class test suite', () => {
     test('Should return true when title has content', () => {
       const validator = new Validator()
 
-      expect(validator.isTitleCorrect('')).toBe(true)
+      expect(validator.isTitleCorrect('content')).toBe(true)
     })
   })
 })
