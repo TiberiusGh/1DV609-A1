@@ -1,1 +1,5 @@
-export class Validator {}
+export class Validator {
+  checkTitle() {
+    throw new TypeError()
+  }
+}
