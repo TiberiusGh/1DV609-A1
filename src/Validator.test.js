@@ -33,5 +33,11 @@ describe('Validator class test suite', () => {
         )
       ).toBe(false)
     })
+
+    test('Should return false when title is null', () => {
+      const validator = new Validator()
+
+      expect(validator.isTitleCorrect(null)).toBe(false)
+    })
   })
 })
