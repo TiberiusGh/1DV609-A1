@@ -11,8 +11,9 @@ describe('Validator class test suite', () => {
     expect(validator).toBeDefined()
   })
 
-  test('Should throw error when the title is falsy', () => {
+  test('Should throw error when title is empty string', () => {
     const validator = new Validator()
-    expect(() => validator.checkTitle()).toThrow(TypeError)
+
+    expect(() => validator.checkTitle('')).toThrow(TypeError)
   })
 })
