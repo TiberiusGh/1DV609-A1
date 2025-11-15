@@ -10,4 +10,10 @@ describe('Validator class test suite', () => {
     // Assert
     expect(validator).toBeDefined()
   })
+
+  const validator = new Validator()
+
+  test('Should throw error when the title is falsy', () => {
+    expect(validator.checkTitle()).toThrow(TypeError)
+  })
 })
