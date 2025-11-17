@@ -1,4 +1,4 @@
-import { Task } from '../Task'
+import { Task } from './Task'
 
 describe('Task class test suite', () => {
   test('Task class should exist', () => {
