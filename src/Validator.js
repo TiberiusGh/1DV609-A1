@@ -4,4 +4,12 @@ export class Validator {
       return false
     } else return !!input
   }
+
+  checkPriority(input) {
+    if (input === ('low' || 'medium' || 'high')) {
+      return true
+    } else {
+      return false
+    }
+  }
 }
