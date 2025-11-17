@@ -30,6 +30,7 @@ describe('Task class test suite', () => {
     // Act
     task.markAsIncomplete()
     task.markAsIncomplete()
+    task.markAsIncomplete()
 
     // Assert
     expect(task.getTaskStatus()).toBe(false)
