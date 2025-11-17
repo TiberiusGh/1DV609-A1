@@ -41,13 +41,9 @@ describe('Validator class test suite', () => {
     })
 
     describe('checkPriority() test suite', () => {
-      let validator
-
-      beforeEach(() => {
-        validator = new Validator()
-      })
-
       test('Should return false when the priority is other than "low", "medium" or "high"', () => {
+        let validator = new Validator()
+
         expect(validator.checkPriority('low')).toBe(true)
       })
     })
