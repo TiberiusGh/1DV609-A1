@@ -1,13 +1,13 @@
-import { Task } from './Task'
+import { Task } from '../Task'
 
 describe('Task class test suite', () => {
   test('Task class should exist', () => {
     // Arrange
-    const Task = new Task()
+    const task = new Task()
 
     // Act
 
     // Assert
-    expect(validator).toBeDefined()
+    expect(task).toBeDefined()
   })
 })
