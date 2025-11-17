@@ -11,17 +11,27 @@ describe('Task class test suite', () => {
     expect(task).toBeDefined()
   })
 
-  describe('markAsComplete() test suite', () => {
-    test('Task should be marked as complete even if markAsComplete() is called multiple times', () => {
-      // Arrange
-      const task = new Task()
+  test('Task should be marked as complete even if markAsComplete() is called multiple times', () => {
+    // Arrange
+    const task = new Task()
 
-      // Act
-      task.markAsComplete()
-      task.markAsComplete()
+    // Act
+    task.markAsComplete()
+    task.markAsComplete()
 
-      // Assert
-      expect(task.getTaskStatus()).toBe(true)
-    })
+    // Assert
+    expect(task.getTaskStatus()).toBe(true)
+  })
+
+  test('Task should be marked as incomplete even if markAsIncomplete() is called multiple times', () => {
+    // Arrange
+    const task = new Task()
+
+    // Act
+    task.markAsIncomplete()
+    task.markAsIncomplete()
+
+    // Assert
+    expect(task.getTaskStatus()).toBe(false)
   })
 })
