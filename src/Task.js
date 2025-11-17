@@ -4,6 +4,9 @@ export class Task {
   markAsComplete() {
     this.#taskStatus = true
   }
+  markAsIncomplete() {
+    this.#taskStatus = false
+  }
 
   getTaskStatus() {
     return this.#taskStatus
