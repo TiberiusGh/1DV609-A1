@@ -47,4 +47,15 @@ describe('TaskRepository class test suite', () => {
     // Assert
     expect(taskRepository.getAllTasks()).toEqual([task1, task2, task3])
   })
+
+  test('Should load stored tasks from injected StoredManager', () => {
+    const storageManagerMock = {
+      load: jest.fn()
+    }
+    const taskRepository = new TaskRepository(storageManagerMock)
+
+    taskRepository.getAllTasks()
+
+    expect(storageManagerMock.load).toHaveBeenCalledTimes(1)
+  })
 })
