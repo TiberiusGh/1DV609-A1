@@ -14,6 +14,7 @@ export class TaskRepository {
   }
 
   getAllTasks() {
+    this.#storageManager.load()
     return this.#tasks
   }
 }
