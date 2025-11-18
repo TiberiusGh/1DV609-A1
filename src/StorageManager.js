@@ -13,4 +13,9 @@ export class StorageManager {
   #formatToJson(input) {
     return JSON.stringify(input, null, 2)
   }
+
+  load() {
+    const data = this.#fileSaveInterface.readFile('./tasks.json', 'utf-8')
+    return JSON.parse(data)
+  }
 }
