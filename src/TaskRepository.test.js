@@ -1,5 +1,6 @@
 import { Task } from './Task'
 import { TaskRepository } from './TaskRepository'
+import { expect, jest, test } from '@jest/globals'
 
 describe('TaskRepository class test suite', () => {
   test('TaskRepository class should exist', () => {
@@ -24,6 +25,6 @@ describe('TaskRepository class test suite', () => {
     taskRepository.add(task)
 
     // Assert
-    expect(storageManagerMock.add).toHaveBeenCalledWith(task)
+    expect(storageManagerMock.save).toHaveBeenCalledWith(task)
   })
 })
