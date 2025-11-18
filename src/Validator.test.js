@@ -41,12 +41,19 @@ describe('Validator class test suite', () => {
     })
 
     describe('checkPriority() test suite', () => {
-      test('Should return false when the priority is other than "low", "medium" or "high"', () => {
+      test('Should return true when the priority is "low", "medium" or "high"', () => {
         let validator = new Validator()
 
         expect(validator.checkPriority('low')).toBe(true)
         expect(validator.checkPriority('medium')).toBe(true)
         expect(validator.checkPriority('high')).toBe(true)
+      })
+
+      test('Should return false when the priority is other than "low", "medium" or "high"', () => {
+        let validator = new Validator()
+        const priority = 'chill'
+
+        expect(validator.checkPriority(priority)).toBe(false)
       })
     })
   })
