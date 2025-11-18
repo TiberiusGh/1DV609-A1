@@ -45,6 +45,8 @@ describe('Validator class test suite', () => {
         let validator = new Validator()
 
         expect(validator.checkPriority('low')).toBe(true)
+        expect(validator.checkPriority('medium')).toBe(true)
+        expect(validator.checkPriority('high')).toBe(true)
       })
     })
   })
