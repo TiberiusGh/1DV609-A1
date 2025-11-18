@@ -17,7 +17,8 @@
   "scripts": {
     "test": "npx --node-options=--experimental-vm-modules jest  || exit 0",
     "test:watch": "npx --node-options=--experimental-vm-modules jest --watch || exit 0",
-    "red": "git add src/**/*.test.js && git commit -m 'RED'",
+    "test:coverage": "npx --node-options=--experimental-vm-modules jest --coverage",
+    "red": "git add src/*.test.js && git commit -m 'RED'",
     "green": "git add src && git commit -m 'GREEN'",
     "ref": "git add src && git commit -m 'REFACTORING'"
   },
