@@ -28,24 +28,25 @@ describe('StorageManager class test suite', () => {
     )
   })
 
-  test('Should load tasks from a JSON file', () => {
+  test('Should load tasks from a JSON file', async () => {
     // Arrange
     let storedData = null
     const fsMock = {
       writeFile: (path, data) => {
         storedData = data
+        return Promise.resolve()
       },
       readFile: () => {
-        return storedData
+        return Promise.resolve(storedData)
       }
     }
     const storageManager = new StorageManager(fsMock)
     const task = new Task()
 
     // Act
-    storageManager.save(task)
+    await storageManager.save(task)
 
     // Assert
-    expect(storageManager.load()).toEqual(task)
+    expect(await storageManager.load()).toEqual(task)
   })
 })

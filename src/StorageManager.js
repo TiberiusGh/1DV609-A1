@@ -5,17 +5,17 @@ export class StorageManager {
     this.#fileSaveInterface = fileSaveInterface
   }
 
-  save(task) {
+  async save(task) {
     const jsonFormated = this.#formatToJson(task)
-    this.#fileSaveInterface.writeFile('./tasks.json', jsonFormated)
+    await this.#fileSaveInterface.writeFile('./tasks.json', jsonFormated)
   }
 
   #formatToJson(input) {
     return JSON.stringify(input, null, 2)
   }
 
-  load() {
-    const data = this.#fileSaveInterface.readFile('./tasks.json', 'utf-8')
+  async load() {
+    const data = await this.#fileSaveInterface.readFile('./tasks.json', 'utf-8')
     return JSON.parse(data)
   }
 }
