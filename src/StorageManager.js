@@ -15,7 +15,14 @@ export class StorageManager {
   }
 
   async load() {
-    const data = await this.#fileSaveInterface.readFile('./tasks.json', 'utf-8')
-    return JSON.parse(data)
+    try {
+      const data = await this.#fileSaveInterface.readFile(
+        './tasks.json',
+        'utf-8'
+      )
+      return JSON.parse(data)
+    } catch (error) {
+      return []
+    }
   }
 }
