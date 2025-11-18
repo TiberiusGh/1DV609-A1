@@ -6,7 +6,7 @@ export class Validator {
   }
 
   checkPriority(input) {
-    if (input === ('low' || 'medium' || 'high')) {
+    if (input === 'low' || input === 'medium' || input === 'high') {
       return true
     } else {
       return false
