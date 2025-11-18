@@ -1,5 +1,5 @@
 import { StorageManager } from './StorageManager'
-import { jest } from '@jest/globals'
+import { expect, jest, test } from '@jest/globals'
 import { Task } from './Task'
 
 describe('StorageManager class test suite', () => {
@@ -48,5 +48,17 @@ describe('StorageManager class test suite', () => {
 
     // Assert
     expect(await storageManager.load()).toEqual(task)
+  })
+
+  test('Should return an empty array when no earlyer saves', async () => {
+    const fsMock = {
+      readFile: () => {
+        return Promise.resolve()
+      }
+    }
+    const storageManager = new StorageManager(fsMock)
+
+    // Assert
+    expect(await storageManager.load()).toEqual([])
   })
 })
