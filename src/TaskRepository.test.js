@@ -35,7 +35,7 @@ describe('TaskRepository class test suite', () => {
     const task3 = new Task()
     const storageManagerMock = {
       save: jest.fn(),
-      load: jest.fn().mockRejectedValue([task1, task2, task3])
+      load: jest.fn().mockReturnValue([task1, task2, task3])
     }
     const taskRepository = new TaskRepository(storageManagerMock)
 
