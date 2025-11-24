@@ -1,5 +1,5 @@
 import { App } from './App'
-import { jest } from '@jest/globals'
+import { expect, jest } from '@jest/globals'
 
 describe('App class test suite', () => {
   test('App class should exist', () => {
@@ -23,17 +23,10 @@ describe('App class test suite', () => {
     await app.start()
 
     // Assert
-    expect(outputMock.log).toHaveBeenCalledWith(
-      expect.stringContaining('1. List all saved tasks')
-    )
-    expect(outputMock.log).toHaveBeenCalledWith(
-      expect.stringContaining('2. Add new task')
-    )
-    expect(outputMock.log).toHaveBeenCalledWith(
-      expect.stringContaining('3. Exit')
-    )
-    expect(outputMock.log).toHaveBeenCalledWith(
-      expect.stringContaining('Your input:')
-    )
+    expect(outputMock.log).toHaveBeenCalledTimes(4)
+    expect(outputMock.log).toHaveBeenNthCalledWith(1, '1. List all saved tasks')
+    expect(outputMock.log).toHaveBeenNthCalledWith(2, '2. Add new task')
+    expect(outputMock.log).toHaveBeenNthCalledWith(3, '3. Exit')
+    expect(outputMock.log).toHaveBeenNthCalledWith(4, 'Your input:')
   })
 })
