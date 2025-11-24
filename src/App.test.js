@@ -29,4 +29,21 @@ describe('App class test suite', () => {
     expect(outputMock.log).toHaveBeenNthCalledWith(3, '3. Exit')
     expect(outputMock.log).toHaveBeenNthCalledWith(4, 'Your input:')
   })
+
+  test('User should be able to input to choose option number 1', async () => {
+    // Arrange
+    const outputMock = {
+      log: jest.fn()
+    }
+    const inputMock = {
+      question: jest.fn().mockResolvedValue('1')
+    }
+    const app = new App(outputMock, inputMock)
+
+    // Act
+    await app.start()
+
+    // Assert
+    expect(inputMock.question).toHaveBeenCalledTimes(1)
+  })
 })
