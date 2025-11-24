@@ -28,14 +28,19 @@ describe('TaskRepository class test suite', () => {
     expect(storageManagerMock.save).toHaveBeenCalledWith(task)
   })
 
-  test('Should be able to retrieve all stored tasks', () => {
+  test('Should be able to save and retrieve the same tasks', async () => {
     // Arrange
     const task1 = new Task()
     const task2 = new Task()
     const task3 = new Task()
+    let savedTasks = []
     const storageManagerMock = {
-      save: jest.fn(),
-      load: jest.fn().mockReturnValue([task1, task2, task3])
+      save: jest.fn().mockImplementation((tasks) => {
+        savedTasks.push(tasks)
+      }),
+      load: jest.fn().mockImplementation(() => {
+        return savedTasks
+      })
     }
     const taskRepository = new TaskRepository(storageManagerMock)
 
@@ -45,7 +50,8 @@ describe('TaskRepository class test suite', () => {
     taskRepository.add(task3)
 
     // Assert
-    expect(taskRepository.getAllTasks()).toEqual([task1, task2, task3])
+    const result = await taskRepository.getAllTasks()
+    expect(result).toEqual([task1, task2, task3])
   })
 
   test('Should load stored tasks from injected StoredManager', () => {
