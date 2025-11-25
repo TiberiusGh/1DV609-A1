@@ -8,7 +8,7 @@ describe('App class test suite', () => {
       log: jest.fn()
     }
     const inputMock = {
-      question: jest.fn().mockResolvedValue('1')
+      question: jest.fn().mockResolvedValue('3')
     }
     const app = new App(outputMock, inputMock)
 
@@ -41,18 +41,21 @@ describe('App class test suite', () => {
   test('User should be able to input to choose option number 1', async () => {
     // Arrange
     const outputMock = {
-      log: jest.fn()
+      log: jest.fn().mockReturnValue([])
     }
     const inputMock = {
-      question: jest.fn().mockResolvedValue('1')
+      question: jest.fn().mockResolvedValueOnce('1').mockResolvedValueOnce('3')
     }
-    const app = new App(outputMock, inputMock)
+    const taskRepositoryMock = {
+      getAllTasks: jest.fn().mockReturnValue([])
+    }
+    const app = new App(outputMock, inputMock, taskRepositoryMock)
 
     // Act
     await app.start()
 
     // Assert
-    expect(inputMock.question).toHaveBeenCalledTimes(1)
+    expect(inputMock.question).toHaveBeenCalledTimes(2)
   })
 
   test('Should display error message when user inputs wrong menu input', async () => {
@@ -61,7 +64,10 @@ describe('App class test suite', () => {
       log: jest.fn()
     }
     const inputMock = {
-      question: jest.fn().mockResolvedValueOnce('invalid menu choice')
+      question: jest
+        .fn()
+        .mockResolvedValueOnce('invalid menu choice')
+        .mockResolvedValueOnce('3')
     }
     const app = new App(outputMock, inputMock)
 
@@ -80,7 +86,7 @@ describe('App class test suite', () => {
       log: jest.fn()
     }
     const inputMock = {
-      question: jest.fn().mockResolvedValueOnce('1')
+      question: jest.fn().mockResolvedValueOnce('1').mockResolvedValueOnce('3')
     }
     const mockTasks = [
       { title: 'Buy groceries', priority: 'high', completed: false }

@@ -33,7 +33,10 @@ export class App {
       } else if (userMenuChoice === '3') {
         this.#isRunning = false
       }
-      this.#isRunning = false
+    }
+
+    if (this.#input.close) {
+      this.#input.close()
     }
   }
 
