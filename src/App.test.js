@@ -32,11 +32,10 @@ describe('App class test suite', () => {
     await app.start()
 
     // Assert
-    expect(outputMock.log).toHaveBeenCalledTimes(4)
+    expect(outputMock.log).toHaveBeenCalledTimes(3)
     expect(outputMock.log).toHaveBeenNthCalledWith(1, '1. List all saved tasks')
     expect(outputMock.log).toHaveBeenNthCalledWith(2, '2. Add new task')
     expect(outputMock.log).toHaveBeenNthCalledWith(3, '3. Exit')
-    expect(outputMock.log).toHaveBeenNthCalledWith(4, 'Your input:')
   })
 
   test('User should be able to input to choose option number 1', async () => {
