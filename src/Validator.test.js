@@ -51,4 +51,12 @@ describe('Validator class test suite', () => {
       })
     })
   })
+
+  describe('validateMenuChoice() test suite', () => {
+    test('returns false when wrong menu option is called', () => {
+      expect(validator.validateMenuChoice('0')).toBe(false)
+      expect(validator.validateMenuChoice('4')).toBe(false)
+      expect(validator.validateMenuChoice('a')).toBe(false)
+    })
+  })
 })
