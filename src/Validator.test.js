@@ -77,5 +77,14 @@ describe('Validator class test suite', () => {
       expect(validator.validateMenuChoice('4')).toBe(false)
       expect(validator.validateMenuChoice('a')).toBe(false)
     })
+
+    test('returns true when correct menu option is called', () => {
+      // Act
+
+      // Assert
+      expect(validator.validateMenuChoice('1')).toBe(true)
+      expect(validator.validateMenuChoice('2')).toBe(true)
+      expect(validator.validateMenuChoice('3')).toBe(true)
+    })
   })
 })
