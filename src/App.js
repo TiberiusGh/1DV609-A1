@@ -30,6 +30,8 @@ export class App {
         this.#outputLogger.log('That menu option is not implemented yet')
       } else if (userMenuChoice === '1') {
         this.#handleDisplayAllTasks()
+      } else if (userMenuChoice === '3') {
+        this.#isRunning = false
       }
       this.#isRunning = false
     }
