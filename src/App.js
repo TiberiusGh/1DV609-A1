@@ -1,15 +1,19 @@
 import * as readline from 'node:readline/promises'
 import { Validator } from './Validator'
+import { TaskRepository } from './TaskRepository'
 
 export class App {
   #outputLogger
   #input
   #isRunning
   #validator = new Validator()
+  #taskRepository
 
-  constructor(output, input) {
+  constructor(output, input, taskRepository) {
     this.#outputLogger = output || console
     this.#input = input || this.#createRealInputDependency()
+    this.#taskRepository =
+      taskRepository || this.#createRealTaskRepoDependency()
   }
 
   async start() {
@@ -22,8 +26,15 @@ export class App {
 
       const inputIsValid = this.#validator.validateMenuChoice(userMenuChoice)
 
-      if (!inputIsValid)
+      if (!inputIsValid) {
         this.#outputLogger.log('That menu option is not implemented yet')
+      } else if (userMenuChoice === '1') {
+        const tasks = this.#taskRepository.getAllTasks()
+        for (const task of tasks) {
+          this.#outputLogger.log(task.title)
+        }
+      }
+
       this.#isRunning = false
     }
   }
@@ -33,6 +44,10 @@ export class App {
       input: process.stdin,
       output: process.stdout
     })
+  }
+
+  #createRealTaskRepoDependency() {
+    return new TaskRepository()
   }
 
   #displyMenuOptions() {
