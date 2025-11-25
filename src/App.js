@@ -1,6 +1,6 @@
 import * as readline from 'node:readline/promises'
-import { Validator } from './Validator'
-import { TaskRepository } from './TaskRepository'
+import { Validator } from './Validator.js'
+import { TaskRepository } from './TaskRepository.js'
 
 export class App {
   #outputLogger
@@ -29,13 +29,31 @@ export class App {
       if (!inputIsValid) {
         this.#outputLogger.log('That menu option is not implemented yet')
       } else if (userMenuChoice === '1') {
-        const tasks = this.#taskRepository.getAllTasks()
-        for (const task of tasks) {
-          this.#outputLogger.log(task.title)
-        }
+        this.#handleDisplayAllTasks()
       }
-
       this.#isRunning = false
+    }
+  }
+
+  #handleDisplayAllTasks() {
+    const tasks = this.#taskRepository.getAllTasks()
+
+    if (tasks.length > 0) {
+      this.#displayStoredTasks(tasks)
+    } else {
+      this.#displayNoStoredTasks()
+    }
+  }
+
+  #displayNoStoredTasks() {
+    this.#outputLogger.log('No tasks stored yet')
+  }
+
+  #displayStoredTasks(tasks) {
+    for (const task of tasks) {
+      const status = task.completed ? '[X]' : '[ ]'
+
+      this.#outputLogger.log(`${status} ${task.title} [${task.priority}]`)
     }
   }
 

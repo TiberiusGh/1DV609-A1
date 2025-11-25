@@ -1,4 +1,4 @@
-import { StorageManager } from './StorageManager'
+import { StorageManager } from './StorageManager.js'
 
 export class TaskRepository {
   #storageManager

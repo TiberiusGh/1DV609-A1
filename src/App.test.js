@@ -18,13 +18,13 @@ describe('App class test suite', () => {
     expect(app).toBeDefined()
   })
 
-  test('Should display menu options when App is instantiated', async () => {
+  test('Should display menu options when app starts', async () => {
     // Arrange
     const outputMock = {
       log: jest.fn()
     }
     const inputMock = {
-      question: jest.fn().mockResolvedValue('1')
+      question: jest.fn().mockResolvedValue('3')
     }
     const app = new App(outputMock, inputMock)
 
