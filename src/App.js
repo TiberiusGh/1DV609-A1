@@ -9,12 +9,7 @@ export class App {
 
   constructor(output, input) {
     this.#outputLogger = output || console
-    this.#input =
-      input ||
-      readline.createInterface({
-        input: process.stdin,
-        output: process.stdout
-      })
+    this.#input = input || this.#createRealInputDependency()
   }
 
   async start() {
@@ -31,6 +26,13 @@ export class App {
         this.#outputLogger.log('That menu option is not implemented yet')
       this.#isRunning = false
     }
+  }
+
+  #createRealInputDependency() {
+    return readline.createInterface({
+      input: process.stdin,
+      output: process.stdout
+    })
   }
 
   #displyMenuOptions() {
