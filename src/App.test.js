@@ -4,7 +4,13 @@ import { expect, jest } from '@jest/globals'
 describe('App class test suite', () => {
   test('App class should exist', () => {
     // Arrange
-    const app = new App()
+    const outputMock = {
+      log: jest.fn()
+    }
+    const inputMock = {
+      question: jest.fn().mockResolvedValue('1')
+    }
+    const app = new App(outputMock, inputMock)
 
     // Act
 
@@ -17,7 +23,10 @@ describe('App class test suite', () => {
     const outputMock = {
       log: jest.fn()
     }
-    const app = new App(outputMock)
+    const inputMock = {
+      question: jest.fn().mockResolvedValue('1')
+    }
+    const app = new App(outputMock, inputMock)
 
     // Act
     await app.start()
