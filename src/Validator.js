@@ -12,4 +12,12 @@ export class Validator {
       return false
     }
   }
+
+  validateMenuChoice(input) {
+    if (input === '1' || input === '2' || input === '3') {
+      return true
+    } else {
+      return false
+    }
+  }
 }
