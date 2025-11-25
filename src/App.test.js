@@ -99,4 +99,21 @@ describe('App class test suite', () => {
       expect.stringContaining('Buy groceries')
     )
   })
+
+  test('Should exit the app when users chooses menu option 3 (Exit)', async () => {
+    // Arrange
+    const outputMock = {
+      log: jest.fn()
+    }
+    const inputMock = {
+      question: jest.fn().mockResolvedValueOnce('3')
+    }
+    const app = new App(outputMock, inputMock)
+
+    // Act
+    await app.start()
+
+    // Assert
+    expect(inputMock.question).toHaveBeenCalledTimes(1)
+  })
 })
