@@ -1,5 +1,5 @@
 import { App } from './App'
-import { expect, jest } from '@jest/globals'
+import { expect, jest, test } from '@jest/globals'
 
 describe('App class test suite', () => {
   test('App class should exist', () => {
@@ -53,5 +53,24 @@ describe('App class test suite', () => {
 
     // Assert
     expect(inputMock.question).toHaveBeenCalledTimes(1)
+  })
+
+  test('Should display error message when user inputs wrong menu input', async () => {
+    // Arrange
+    const outputMock = {
+      log: jest.fn()
+    }
+    const inputMock = {
+      question: jest.fn().mockResolvedValueOnce('invalid menu choice')
+    }
+    const app = new App(outputMock, inputMock)
+
+    // Act
+    await app.start()
+
+    // Assert
+    expect(outputMock.log).toHaveBeenCalledWith(
+      'That menu option is not implemented yet'
+    )
   })
 })
