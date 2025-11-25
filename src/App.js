@@ -22,6 +22,13 @@ export class App {
       this.#displyMenuOptions()
 
       const userMenuChoice = await this.#input.question('Your input: ')
+
+      if (
+        userMenuChoice !== '1' &&
+        userMenuChoice !== '2' &&
+        userMenuChoice !== '3'
+      )
+        this.#outputLogger.log('That menu option is not implemented yet')
       this.#isRunning = false
     }
   }
