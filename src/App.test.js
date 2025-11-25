@@ -73,4 +73,30 @@ describe('App class test suite', () => {
       'That menu option is not implemented yet'
     )
   })
+
+  test('Should display stored tasks when users chooses menu option 1 (List all saved tasks)', async () => {
+    // Arrange
+    const outputMock = {
+      log: jest.fn()
+    }
+    const inputMock = {
+      question: jest.fn().mockResolvedValueOnce('1')
+    }
+    const mockTasks = [
+      { title: 'Buy groceries', priority: 'high', completed: false }
+    ]
+    const taskRepositoryMock = {
+      getAllTasks: jest.fn().mockReturnValue(mockTasks)
+    }
+    const app = new App(outputMock, inputMock, taskRepositoryMock)
+
+    // Act
+    await app.start()
+
+    // Assert
+    expect(taskRepositoryMock.getAllTasks).toHaveBeenCalledTimes(1)
+    expect(outputMock.log).toHaveBeenCalledWith(
+      expect.stringContaining('Buy groceries')
+    )
+  })
 })
