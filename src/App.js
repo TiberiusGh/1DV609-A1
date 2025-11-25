@@ -1,9 +1,11 @@
 import * as readline from 'node:readline/promises'
+import { Validator } from './Validator'
 
 export class App {
   #outputLogger
   #input
   #isRunning
+  #validator = new Validator()
 
   constructor(output, input) {
     this.#outputLogger = output || console
@@ -23,11 +25,9 @@ export class App {
 
       const userMenuChoice = await this.#input.question('Your input: ')
 
-      if (
-        userMenuChoice !== '1' &&
-        userMenuChoice !== '2' &&
-        userMenuChoice !== '3'
-      )
+      const inputIsValid = this.#validator.validateMenuChoice(userMenuChoice)
+
+      if (!inputIsValid)
         this.#outputLogger.log('That menu option is not implemented yet')
       this.#isRunning = false
     }
