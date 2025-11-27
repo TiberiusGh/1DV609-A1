@@ -1,5 +1,10 @@
 export class Task {
   #taskStatus
+  #taskTitle
+
+  constructor({ taskTitle = 'Correct title' } = {}) {
+    this.#taskTitle = taskTitle
+  }
 
   markAsComplete() {
     this.#taskStatus = true
@@ -10,5 +15,9 @@ export class Task {
 
   getTaskStatus() {
     return this.#taskStatus
+  }
+
+  getTitle() {
+    return this.#taskTitle
   }
 }
