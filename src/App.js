@@ -20,23 +20,30 @@ export class App {
     this.#isRunning = true
 
     while (this.#isRunning) {
-      this.#displyMenuOptions()
-
-      const userMenuChoice = await this.#input.question('Your input: ')
-
-      const inputIsValid = this.#validator.validateMenuChoice(userMenuChoice)
-
-      if (!inputIsValid) {
-        this.#outputLogger.log('That menu option is not implemented yet')
-      } else if (userMenuChoice === '1') {
-        this.#handleDisplayAllTasks()
-      } else if (userMenuChoice === '3') {
-        this.#isRunning = false
-      }
+      await this.#processMenu()
     }
 
     if (this.#input.close) {
       this.#input.close()
+    }
+  }
+
+  async #processMenu() {
+    this.#displyMenuOptions()
+
+    const userMenuChoice = await this.#input.question('Your input: ')
+    await this.#handleInputMenuChoice(userMenuChoice)
+  }
+
+  async #handleInputMenuChoice(menuChoice) {
+    const inputIsValid = this.#validator.validateMenuChoice(menuChoice)
+
+    if (!inputIsValid) {
+      this.#outputLogger.log('That menu option is not implemented yet')
+    } else if (menuChoice === '1') {
+      this.#handleDisplayAllTasks()
+    } else if (menuChoice === '3') {
+      this.#isRunning = false
     }
   }
 
