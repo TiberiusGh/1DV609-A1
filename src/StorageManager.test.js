@@ -8,7 +8,13 @@ describe('StorageManager class test suite', () => {
       writeFile: jest.fn().mockResolvedValue()
     }
     const storageManager = new StorageManager(fsMock)
-    const task = new Task()
+    const taskDataStructure = {
+      title: 'title',
+      priority: 'low',
+      completed: true
+    }
+
+    const task = new Task(taskDataStructure)
 
     await storageManager.save(task)
 

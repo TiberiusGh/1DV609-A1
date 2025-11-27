@@ -5,7 +5,12 @@ import { expect, jest, test } from '@jest/globals'
 describe('TaskRepository class test suite', () => {
   test('Should be able to add new tasks', () => {
     // Arrange
-    const task = new Task()
+    const taskDataStructure = {
+      title: 'title',
+      priority: 'low',
+      completed: true
+    }
+    const task = new Task(taskDataStructure)
     const storageManagerMock = {
       save: jest.fn()
     }
@@ -20,9 +25,14 @@ describe('TaskRepository class test suite', () => {
 
   test('Should be able to save and retrieve the same tasks', async () => {
     // Arrange
-    const task1 = new Task()
-    const task2 = new Task()
-    const task3 = new Task()
+    const taskDataStructure = {
+      title: 'title',
+      priority: 'low',
+      completed: true
+    }
+    const task1 = new Task(taskDataStructure)
+    const task2 = new Task(taskDataStructure)
+    const task3 = new Task(taskDataStructure)
     let savedTasks = []
     const storageManagerMock = {
       save: jest.fn().mockImplementation((tasks) => {

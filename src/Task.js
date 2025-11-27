@@ -1,23 +1,30 @@
 export class Task {
-  #taskStatus
-  #taskTitle
+  #title
+  #priority
+  #completed
 
-  constructor({ taskTitle = 'Correct title' } = {}) {
-    this.#taskTitle = taskTitle
+  constructor({ title, priority, completed }) {
+    this.#title = title
+    this.#priority = priority
+    this.#completed = completed
   }
 
   markAsComplete() {
-    this.#taskStatus = true
+    this.#completed = true
   }
   markAsIncomplete() {
-    this.#taskStatus = false
-  }
-
-  getTaskStatus() {
-    return this.#taskStatus
+    this.#completed = false
   }
 
   getTitle() {
-    return this.#taskTitle
+    return this.#title
+  }
+
+  getPriority() {
+    return this.#priority
+  }
+
+  getIsCompleted() {
+    return this.#completed
   }
 }
