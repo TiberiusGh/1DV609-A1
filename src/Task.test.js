@@ -54,4 +54,23 @@ describe('Task class test suite', () => {
     expect(SUT.getPriority()).toBe('medium')
     expect(SUT.getIsCompleted()).toBe(true)
   })
+
+  test('Should provide serialization to JSON for the private fields', () => {
+    // Arrange
+    const taskDataStructure = {
+      title: 'Test task',
+      priority: 'high',
+      completed: false
+    }
+    const task = new Task(taskDataStructure)
+
+    // Act
+    const json = JSON.stringify(task)
+    const parsed = JSON.parse(json)
+
+    // Assert
+    expect(parsed.title).toBe('Test task')
+    expect(parsed.priority).toBe('high')
+    expect(parsed.completed).toBe(false)
+  })
 })
