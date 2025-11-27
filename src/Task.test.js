@@ -25,4 +25,15 @@ describe('Task class test suite', () => {
     // Assert
     expect(task.getTaskStatus()).toBe(false)
   })
+
+  test('getTitle should return the correct title', () => {
+    // Arrange
+    const tastData = { title: 'Correct title' }
+    const SUT = new Task(tastData)
+
+    // Act
+
+    // Assert
+    expect(SUT.getTitle()).toBe('Correct title')
+  })
 })
