@@ -12,6 +12,7 @@ export class Task {
   markAsComplete() {
     this.#completed = true
   }
+
   markAsIncomplete() {
     this.#completed = false
   }
@@ -26,5 +27,13 @@ export class Task {
 
   getIsCompleted() {
     return this.#completed
+  }
+
+  toJSON() {
+    return {
+      title: this.getTitle(),
+      priority: this.getPriority(),
+      completed: this.getIsCompleted()
+    }
   }
 }
