@@ -8,13 +8,6 @@ describe('Validator class test suite', () => {
     validator = new Validator()
   })
 
-  test('Validator class should exist', () => {
-    // Act
-
-    // Assert
-    expect(validator).toBeDefined()
-  })
-
   describe('checkTitle() test suite', () => {
     test('Should return false when title is empty string', () => {
       // Act

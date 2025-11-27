@@ -2,22 +2,6 @@ import { App } from './App'
 import { expect, jest, test } from '@jest/globals'
 
 describe('App class test suite', () => {
-  test('App class should exist', () => {
-    // Arrange
-    const outputMock = {
-      log: jest.fn()
-    }
-    const inputMock = {
-      question: jest.fn().mockResolvedValue('3')
-    }
-    const app = new App(outputMock, inputMock)
-
-    // Act
-
-    // Assert
-    expect(app).toBeDefined()
-  })
-
   test('Should display menu options when app starts', async () => {
     // Arrange
     const outputMock = {
