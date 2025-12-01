@@ -8,7 +8,7 @@ export class Task {
 
   constructor({ title, priority, completed }) {
     this.#title = this.#validateTitle(title)
-    this.#priority = priority
+    this.#priority = this.#validatePriority(priority)
     this.#completed = completed
   }
 
@@ -47,6 +47,18 @@ export class Task {
       return title
     } else {
       throw new Error('The title should be at most 50 characters long')
+    }
+  }
+
+  #validatePriority(priority) {
+    const isValid = this.#validator.checkPriority(priority)
+
+    if (isValid) {
+      return priority
+    } else {
+      throw new Error(
+        'The priority should be between "low", "medium" or "high"'
+      )
     }
   }
 }
