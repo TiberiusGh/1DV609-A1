@@ -52,15 +52,26 @@ describe('StorageManager class test suite', () => {
     expect(loadedTask[0].getTitle()).toBe('task title')
   })
 
-  test('Should return an empty array when no earlyer saves', async () => {
-    const fsMock = {
-      readFile: () => {
-        return Promise.resolve()
-      }
+  test('When retrieving Tasks and the storage file does not exist it should create the file', async () => {
+    // Arrange
+    const injectedDependency = {
+      readFile: jest
+        .fn()
+        .mockRejectedValueOnce(
+          new Error('The file for storing Tasks was not found')
+        )
+        .mockResolvedValueOnce([]),
+      writeFile: jest.fn().mockResolvedValue()
     }
-    const storageManager = new StorageManager(fsMock)
+    const storageManager = new StorageManager(injectedDependency)
+
+    // Act
+    await storageManager.load()
 
     // Assert
-    expect(await storageManager.load()).toEqual([])
+    expect(injectedDependency.writeFile).toHaveBeenLastCalledWith(
+      './tasks.json',
+      '[]'
+    )
   })
 })
