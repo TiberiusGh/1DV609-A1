@@ -73,4 +73,16 @@ describe('Task class test suite', () => {
     expect(parsed.priority).toBe('high')
     expect(parsed.completed).toBe(false)
   })
+
+  test('Should throw error when title is invalid', () => {
+    // Arrange
+    const taskDataStructure = {
+      title: 'String with length of 51 charactersssssssssssssssss',
+      priority: 'high',
+      completed: false
+    }
+    // Act
+    // Assert
+    expect(() => new Task(taskDataStructure)).toThrow()
+  })
 })
