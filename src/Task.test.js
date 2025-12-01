@@ -85,4 +85,16 @@ describe('Task class test suite', () => {
     // Assert
     expect(() => new Task(taskDataStructure)).toThrow()
   })
+
+  test('Should throw error when priority is invalid', () => {
+    // Arrange
+    const taskDataStructure = {
+      title: 'Correct title',
+      priority: 'invalid priority',
+      completed: false
+    }
+    // Act
+    // Assert
+    expect(() => new Task(taskDataStructure)).toThrow()
+  })
 })
