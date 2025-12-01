@@ -2,19 +2,18 @@ import { StorageManager } from './StorageManager.js'
 
 export class TaskRepository {
   #storageManager
-  #tasks = []
 
   constructor(storageManager = new StorageManager()) {
     this.#storageManager = storageManager
   }
 
-  add(newTask) {
-    this.#storageManager.save(newTask)
-    this.#tasks.push(newTask)
+  async add(newTask) {
+    const tasks = await this.#storageManager.load()
+    tasks.push(newTask)
+    await this.#storageManager.save(tasks)
   }
 
-  getAllTasks() {
-    this.#storageManager.load()
-    return this.#tasks
+  async getAllTasks() {
+    return await this.#storageManager.load()
   }
 }

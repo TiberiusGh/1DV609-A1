@@ -3,7 +3,7 @@ import { TaskRepository } from './TaskRepository'
 import { expect, jest, test } from '@jest/globals'
 
 describe('TaskRepository class test suite', () => {
-  test('Should be able to add new tasks', () => {
+  test('Should be able to add new tasks', async () => {
     // Arrange
     const taskDataStructure = {
       title: 'title',
@@ -12,15 +12,16 @@ describe('TaskRepository class test suite', () => {
     }
     const task = new Task(taskDataStructure)
     const storageManagerMock = {
-      save: jest.fn()
+      save: jest.fn(),
+      load: jest.fn().mockResolvedValue([])
     }
     const taskRepository = new TaskRepository(storageManagerMock)
 
     // Act
-    taskRepository.add(task)
+    await taskRepository.add(task)
 
     // Assert
-    expect(storageManagerMock.save).toHaveBeenCalledWith(task)
+    expect(storageManagerMock.save).toHaveBeenCalledWith([task])
   })
 
   test('Should be able to save and retrieve the same tasks', async () => {
@@ -36,10 +37,11 @@ describe('TaskRepository class test suite', () => {
     let savedTasks = []
     const storageManagerMock = {
       save: jest.fn().mockImplementation((tasks) => {
-        savedTasks.push(tasks)
+        savedTasks = tasks
+        return Promise.resolve()
       }),
       load: jest.fn().mockImplementation(() => {
-        return savedTasks
+        return Promise.resolve(savedTasks)
       })
     }
     const taskRepository = new TaskRepository(storageManagerMock)
@@ -54,9 +56,9 @@ describe('TaskRepository class test suite', () => {
     expect(result).toEqual([task1, task2, task3])
   })
 
-  test('Should load stored tasks from injected StoredManager', () => {
+  test('Should load stored tasks from injected StoredManager', async () => {
     const storageManagerMock = {
-      load: jest.fn()
+      load: jest.fn().mockResolvedValue([])
     }
     const taskRepository = new TaskRepository(storageManagerMock)
 
