@@ -41,8 +41,7 @@ describe('Task class test suite', () => {
     // Arrange
     const taskDataStructure = {
       title: 'Correct title',
-      priority: 'medium',
-      completed: true
+      priority: 'medium'
     }
     // Easyer to just create a real instance than create a mock
     const SUT = new Task(taskDataStructure)
@@ -52,7 +51,7 @@ describe('Task class test suite', () => {
     // Assert
     expect(SUT.getTitle()).toBe('Correct title')
     expect(SUT.getPriority()).toBe('medium')
-    expect(SUT.getIsCompleted()).toBe(true)
+    expect(SUT.getIsCompleted()).toBe(false)
   })
 
   test('Should provide serialization to JSON for the private fields', () => {
