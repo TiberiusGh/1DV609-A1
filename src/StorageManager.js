@@ -1,7 +1,10 @@
+import { Task } from './Task.js'
+import { promises as fs } from 'node:fs'
+
 export class StorageManager {
   #fileSaveInterface
 
-  constructor(fileSaveInterface) {
+  constructor(fileSaveInterface = fs) {
     this.#fileSaveInterface = fileSaveInterface
   }
 
@@ -20,8 +23,12 @@ export class StorageManager {
         './tasks.json',
         'utf-8'
       )
-      return JSON.parse(data)
+      const parsedData = JSON.parse(data)
+      return parsedData.map((item) => new Task(item))
     } catch (error) {
+      console.log(
+        'Something went wrong. Here is more about the error: ' + error.message
+      )
       return []
     }
   }

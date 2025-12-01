@@ -28,22 +28,28 @@ describe('StorageManager class test suite', () => {
     // Arrange
     let storedData = null
     const fsMock = {
-      writeFile: (path, data) => {
+      writeFile: jest.fn((path, data) => {
         storedData = data
         return Promise.resolve()
-      },
-      readFile: () => {
+      }),
+      readFile: jest.fn(() => {
         return Promise.resolve(storedData)
-      }
+      })
     }
     const storageManager = new StorageManager(fsMock)
-    const task = new Task()
+    const taskDataStructure = {
+      title: 'task title',
+      priority: 'low',
+      completed: true
+    }
+    const task = new Task(taskDataStructure)
 
     // Act
-    await storageManager.save(task)
+    await storageManager.save([task])
 
     // Assert
-    expect(await storageManager.load()).toEqual(task)
+    const loadedTask = await storageManager.load()
+    expect(loadedTask[0].getTitle()).toBe('task title')
   })
 
   test('Should return an empty array when no earlyer saves', async () => {
