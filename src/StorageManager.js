@@ -19,17 +19,21 @@ export class StorageManager {
 
   async load() {
     try {
-      const data = await this.#fileSaveInterface.readFile(
-        './tasks.json',
-        'utf-8'
-      )
-      const parsedData = JSON.parse(data)
-      return parsedData.map((item) => new Task(item))
+      return await this.#tryToLoadTasks()
     } catch (error) {
-      console.log(
-        'Something went wrong. Here is more about the error: ' + error.message
-      )
-      return []
+      return await this.#handleFailToLoadTasks()
     }
+  }
+
+  async #tryToLoadTasks() {
+    const data = await this.#fileSaveInterface.readFile('./tasks.json', 'utf-8')
+    const parsedData = JSON.parse(data)
+    return parsedData.map((item) => new Task(item))
+  }
+
+  async #handleFailToLoadTasks(error) {
+    // Missing file could be one of the reason of failing. More assertions of the error must be added
+    await this.#fileSaveInterface.writeFile('./tasks.json', '[]')
+    return []
   }
 }
