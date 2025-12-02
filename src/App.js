@@ -1,6 +1,7 @@
 import * as readline from 'node:readline/promises'
 import { Validator } from './Validator.js'
 import { TaskRepository } from './TaskRepository.js'
+import { Task } from './Task.js'
 
 export class App {
   #outputLogger
@@ -42,9 +43,16 @@ export class App {
       this.#outputLogger.log('That menu option is not implemented yet')
     } else if (menuChoice === '1') {
       this.#handleDisplayAllTasks()
+    } else if (menuChoice === '2') {
+      this.#handleAddNewTask()
     } else if (menuChoice === '3') {
       this.#isRunning = false
     }
+  }
+
+  async #handleAddNewTask() {
+    const title = await this.#input.question('Enter task title: ')
+    const priority = await this.#input.question('Enter task priority: ')
   }
 
   #handleDisplayAllTasks() {
