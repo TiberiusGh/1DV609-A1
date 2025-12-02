@@ -53,6 +53,10 @@ export class App {
   async #handleAddNewTask() {
     const title = await this.#input.question('Enter task title: ')
     const priority = await this.#input.question('Enter task priority: ')
+
+    const task = new Task({ title, priority })
+
+    this.#taskRepository.add(task)
   }
 
   #handleDisplayAllTasks() {
