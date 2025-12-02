@@ -75,10 +75,20 @@ describe('App class test suite', () => {
     const inputMock = {
       question: jest.fn().mockResolvedValueOnce('1').mockResolvedValueOnce('3')
     }
-    const taskDataStructure = { title: 'Buy groceries', priority: 'high' }
-    const task = new Task(taskDataStructure)
+    const taskOneDataStructure = {
+      title: 'Buy groceries',
+      priority: 'high',
+      completed: 'true'
+    }
+    const taskOne = new Task(taskOneDataStructure)
+    const taskTwoDataStructure = {
+      title: 'Buy clothes',
+      priority: 'high'
+    }
+    const taskTwo = new Task(taskTwoDataStructure)
+
     const taskRepositoryMock = {
-      getAllTasks: jest.fn().mockReturnValue([task])
+      getAllTasks: jest.fn().mockReturnValue([taskOne, taskTwo])
     }
     const app = new App(outputMock, inputMock, taskRepositoryMock)
 
@@ -89,6 +99,9 @@ describe('App class test suite', () => {
     expect(taskRepositoryMock.getAllTasks).toHaveBeenCalledTimes(1)
     expect(outputMock.log).toHaveBeenCalledWith(
       expect.stringContaining('Buy groceries')
+    )
+    expect(outputMock.log).toHaveBeenCalledWith(
+      expect.stringContaining('Buy clothes')
     )
   })
 
