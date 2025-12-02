@@ -1,4 +1,5 @@
-import { App } from './App'
+import { App } from './App.js'
+import { Task } from './Task.js'
 import { expect, jest, test } from '@jest/globals'
 
 describe('App class test suite', () => {
@@ -107,5 +108,31 @@ describe('App class test suite', () => {
 
     // Assert
     expect(inputMock.question).toHaveBeenCalledTimes(1)
+  })
+
+  test('Should prompt user for task title when menu option 2 is selected', async () => {
+    // Arrange
+    const outputMock = { log: jest.fn() }
+    const inputMock = {
+      question: jest
+        .fn()
+        .mockResolvedValueOnce('2')
+        .mockResolvedValueOnce('Ga till skolan')
+        .mockResolvedValueOnce('high')
+        .mockResolvedValueOnce('3'),
+      close: jest.fn()
+    }
+    const taskRepositoryMock = {
+      getAllTasks: jest.fn().mockResolvedValue([]),
+      add: jest.fn().mockResolvedValue()
+    }
+    const app = new App(outputMock, inputMock, taskRepositoryMock)
+
+    // Act
+    await app.start()
+
+    // Assert
+    expect(inputMock.question).toHaveBeenCalledWith('Enter task title: ')
+    expect(inputMock.question).toHaveBeenCalledWith('Enter task priority: ')
   })
 })
