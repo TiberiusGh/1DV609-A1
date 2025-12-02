@@ -25,7 +25,7 @@ describe('App class test suite', () => {
     expect(outputMock.log).toHaveBeenNthCalledWith(5, '')
   })
 
-  test('User should be able to input to choose option number 1', async () => {
+  test('User should be able to write menu option 1', async () => {
     // Arrange
     const outputMock = {
       log: jest.fn().mockReturnValue([])
@@ -75,11 +75,10 @@ describe('App class test suite', () => {
     const inputMock = {
       question: jest.fn().mockResolvedValueOnce('1').mockResolvedValueOnce('3')
     }
-    const mockTasks = [
-      { title: 'Buy groceries', priority: 'high', completed: false }
-    ]
+    const taskDataStructure = { title: 'Buy groceries', priority: 'high' }
+    const task = new Task(taskDataStructure)
     const taskRepositoryMock = {
-      getAllTasks: jest.fn().mockReturnValue(mockTasks)
+      getAllTasks: jest.fn().mockReturnValue([task])
     }
     const app = new App(outputMock, inputMock, taskRepositoryMock)
 

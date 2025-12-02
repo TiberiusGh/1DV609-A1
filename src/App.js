@@ -42,9 +42,9 @@ export class App {
     if (!inputIsValid) {
       this.#outputLogger.log('That menu option is not implemented yet')
     } else if (menuChoice === '1') {
-      this.#handleDisplayAllTasks()
+      await this.#handleDisplayAllTasks()
     } else if (menuChoice === '2') {
-      this.#handleAddNewTask()
+      await this.#handleAddNewTask()
     } else if (menuChoice === '3') {
       this.#isRunning = false
     }
@@ -59,11 +59,12 @@ export class App {
     this.#taskRepository.add(task)
   }
 
-  #handleDisplayAllTasks() {
-    const tasks = this.#taskRepository.getAllTasks()
+  async #handleDisplayAllTasks() {
+    const tasks = await this.#taskRepository.getAllTasks()
 
     if (tasks.length > 0) {
       this.#displayStoredTasks(tasks)
+      this.#outputLogger.log('')
     } else {
       this.#displayNoStoredTasks()
     }
@@ -75,9 +76,11 @@ export class App {
 
   #displayStoredTasks(tasks) {
     for (const task of tasks) {
-      const status = task.completed ? '[X]' : '[ ]'
+      const status = task.getIsCompleted() ? '[X]' : '[ ]'
 
-      this.#outputLogger.log(`${status} ${task.title} [${task.priority}]`)
+      this.#outputLogger.log(
+        `${status} ${task.getTitle()} (${task.getPriority()})`
+      )
     }
   }
 

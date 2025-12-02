@@ -6,10 +6,10 @@ export class Task {
   #completed
   #validator = new Validator()
 
-  constructor({ title, priority }) {
+  constructor({ title, priority, completed = false }) {
     this.#title = this.#validateTitle(title)
     this.#priority = this.#validatePriority(priority)
-    this.#completed = false
+    this.#completed = completed
   }
 
   markAsComplete() {
