@@ -135,4 +135,30 @@ describe('App class test suite', () => {
     expect(inputMock.question).toHaveBeenCalledWith('Enter task title: ')
     expect(inputMock.question).toHaveBeenCalledWith('Enter task priority: ')
   })
+
+  test('When adding a task trough menu option 2 it should save the task to file', async () => {
+    // Arrange
+    const outputMock = { log: jest.fn() }
+    const inputMock = {
+      question: jest
+        .fn()
+        .mockResolvedValueOnce('2')
+        .mockResolvedValueOnce('Ga till skolan')
+        .mockResolvedValueOnce('high')
+        .mockResolvedValueOnce('3'),
+      close: jest.fn()
+    }
+    const taskRepositoryMock = {
+      getAllTasks: jest.fn().mockResolvedValue([]),
+      add: jest.fn().mockResolvedValue()
+    }
+    const app = new App(outputMock, inputMock, taskRepositoryMock)
+
+    // Act
+    await app.start()
+
+    // Assert
+    expect(taskRepositoryMock.add).toHaveBeenCalledTimes(1)
+    expect(taskRepositoryMock.add).toHaveBeenCalledWith(expect.any(Task))
+  })
 })
