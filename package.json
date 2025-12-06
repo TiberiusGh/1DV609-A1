@@ -15,8 +15,9 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "npx --node-options=--experimental-vm-modules jest  || exit 0",
-    "test:watch": "npx --node-options=--experimental-vm-modules jest --watch || exit 0",
+    "test:watch": "npx --node-options=--experimental-vm-modules jest --watchAll || exit 0",
     "test:coverage": "npx --node-options=--experimental-vm-modules jest --coverage",
     "red": "git add src/*.test.js && git commit -m 'RED'",
     "green": "git add src && git commit -m 'GREEN'",
